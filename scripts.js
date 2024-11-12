@@ -18,6 +18,8 @@
 
 // simple modal for guesing a number greater than 100
 
+//first way
+
 // let userNum = "";
 // while (true) {
 // 	userNum = +prompt("guess the nimber: ");
@@ -31,3 +33,27 @@
 // 		alert("try again ... ");
 // 	}
 // }
+
+//second way
+
+// let guess = '';
+// do {
+//   guess = +prompt("guess the number: ");
+
+// } while (guess <= 100 && guess);
+
+////////////////////////////////////////////////
+
+// finding prime numbers lower than n
+
+// let n = +prompt("enter value for n: ");
+
+// out: for (let i = 1; i < n; i++) {
+//   for (let j = 2; j < i; j++) {
+//     if(i % j == 0) continue out;
+//   }
+//   alert(i);
+// }
+
+//////////////////////////////////////////////////
+
