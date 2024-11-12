@@ -102,3 +102,48 @@
 
 /////////////////////////////////////////////////////
 
+//function expression
+
+// let sayHi = function(){
+//   alert("hello");
+// };
+
+// sayHi();
+
+/////////////////////////////////////////////////////
+
+// callback function
+
+// let ask = function(question,yes,no){
+//   (confirm(question)) ? yes() : no();
+// };
+
+// let showOk = function(){
+//   alert("you pressed ok")
+// };
+
+// let showCancel = function(){
+//   alert("you just canceled")
+// };
+
+// ask("do you confirm or not?" , showOk , showCancel);
+
+/////////////////////////////////////////////////////
+
+// function ask(question, yes, no) {
+// 	if (confirm(question)) yes();
+// 	else no();
+// }
+
+// ask(
+// 	"Do you agree?",
+// 	function () {
+// 		alert("You agreed.");
+// 	},
+// 	function () {
+// 		alert("You canceled the execution.");
+// 	}
+// );
+
+/////////////////////////////////////////////////////
+
