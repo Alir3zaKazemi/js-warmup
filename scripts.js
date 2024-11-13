@@ -201,10 +201,8 @@
 //   }
 // }
 
-
 // multiplyNumeric(menu);
 // console.log(menu)
-
 
 // method 2
 
@@ -225,3 +223,207 @@
 
 ///////////////////////////////////////////////////
 
+//assigning an obj to another
+
+// let user = {
+// 	name: "John",
+// 	age: 30,
+// };
+
+// let clone = Object.assign({}, user);
+
+// user.age = 65;
+
+// console.log(clone.name); // John
+// console.log(clone.age); // 30
+// console.log(user.age); // 65
+// console.log(clone);
+
+/////////////////////////////////////////////////////
+
+//difference of copying reference and the obj itself
+
+// let user = {
+// 	name: "John",
+// 	sizes: {
+// 		height: 182,
+// 		width: 50,
+// 	},
+// };
+
+// let clone = Object.assign({}, user);
+
+// console.log(user.sizes === clone.sizes); // true, same object
+
+// user.name = 'ali';
+
+// console.log(user.name)  //ali
+// console.log(clone.name) //john
+
+// user.sizes.width = 60; // change a property from one place
+// console.log(user.sizes.width);  //60
+// console.log(clone.sizes.width);  //60
+
+//////////////////////////////////////////////////////////////
+
+// structure cloning an object
+
+// let user = {
+//   name: "John",
+//   sizes: {
+//     height: 182,
+//     width: 50
+//   }
+// };
+
+// let clone = structuredClone(user);
+
+// console.log( user.sizes == clone.sizes ); // false, different objects
+
+// // user and clone are totally unrelated now
+// user.sizes.width = 60;    // change a property from one place
+// console.log(user.sizes.width);  // 60
+// console.log(clone.sizes.width); // 50, not related
+
+///////////////////////////////////////////////////////////////////
+
+//this keyword
+
+// let user = {
+// 	name: "John",
+// 	age: 30,
+
+// 	sayHi() {
+// 		console.log(this.name); // if this was user.name then it would be an error
+// 	},
+// };
+
+// let admin = user;
+// user = null;
+
+// admin.sayHi();
+
+//////////////////////////////////////////////////////////////////
+
+// calculator with functions in obj  ******
+
+// let calculator = {
+//   read(){
+//     this.a = +prompt("first");
+// 		this.b = +prompt("second");
+//   },
+//   sum(){
+//     return this.a + this.b;
+//   },
+//   mul(){
+//     return this.a * this.b;
+//   }
+// };
+
+// calculator.read();
+// console.log(calculator)
+// console.log(calculator.sum());
+// console.log(calculator.mul());
+
+//////////////////////////////////////////////////////////
+
+//constructor function and keywords ("this" "new")
+
+// function Video(title) {
+// 	this.name = title;
+//   console.log("this is the 'this' keyword in constructor function",this);
+// }
+
+// let user = new Video("arcane");
+// let second = new Video("pinguein");
+
+// console.log("this is the user",user)
+// console.log("this is the second",second)
+
+//////////////////////////////////////////////////////////
+
+// this in constructor
+
+// function Calculator(){
+//   this.read= () => {
+//     this.a = +prompt("num 1 ");
+//     this.b = +prompt("num 2 ");
+//   };
+//   this.sum = () => {
+//     return this.a + this.b;
+//   };
+//   this.mul = () => {
+//     return this.a * this.b
+//   };
+// }
+
+
+
+// let calculator = new Calculator();
+// calculator.read();
+
+// console.log("Sum=" + calculator.sum());
+// console.log("Mul=" + calculator.mul());
+
+//////////////////////////////////////////////////////////
+
+// constructor function as accumulator
+
+// function Accumulator(startingValue) {
+//   this.value = startingValue;
+//   this.read = () => {
+//     this.value += +prompt("??");
+//   };
+// }
+
+// let accumulator = new Accumulator(1);
+// accumulator.read();
+// accumulator.read();
+// console.log(accumulator.value);
+
+/////////////////////////////////////////////////////////
+
+// adding a function to an object as a property
+
+// let user = {
+//   name : "ali",
+//   age : 15,
+// };
+
+// user.sayHi = () => {console.log("Hello mate")};
+// user.sayHi();
+// console.log(user)
+
+///////////////////////////////////////////////////////////
+
+// let user = {
+// 	name: "John",
+// };
+
+// let id1 = Symbol("id");
+
+// user[id1] = 1;
+
+// console.log(user[id1]);
+// console.log(user);
+
+///////////////////////////////////////////////////////////
+
+//object conversion 
+
+// let user = {
+// 	name: "John",
+// 	money: 1000,
+
+// 	[Symbol.toPrimitive](hint) {
+// 		alert(`hint: ${hint}`);
+// 		return hint == "string" ? `{name: "${this.name}"}` : this.money;
+// 	},
+// };
+
+// // conversions demo:
+// alert(user); // hint: string -> {name: "John"}
+// alert(+user); // hint: number -> 1000
+// alert(user + 500);
+
+//////////////////////////////////////////////////////////
