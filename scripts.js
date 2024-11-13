@@ -1,3 +1,4 @@
+"use strict";
 // a simple modal mode for checking user and pass
 
 // let visitor = prompt("who are you?");
@@ -146,4 +147,81 @@
 // );
 
 /////////////////////////////////////////////////////
+
+// loops in obj
+
+// let obj = {
+//   gender:'male',
+// 	name: "ali",
+// 	age: 18,
+// };
+
+// for( let key in obj){
+//   console.log(key)
+// }
+// for( let key in obj){
+//   console.log(obj[key])
+// }
+
+/////////////////////////////////////////////////////
+
+// function for summation of salaries in object
+
+// let salaries = {
+// 	John: 100,
+// 	Ann: 160,
+// 	Pete: 130,
+// };
+
+// let sumSalaries = (obj) => {
+//   let sum = 0;
+//   for (let key in obj) {
+//     sum += obj[key];
+//   }
+//   return sum;
+// }
+
+// console.log(sumSalaries(salaries))
+
+////////////////////////////////////////////////////
+
+// multiplying the numeric key values in obj
+// method 1
+
+// let menu = {
+// 	width: 200,
+// 	height: 300,
+// 	title: "My menu",
+// };
+
+// let multiplyNumeric = (obj) =>{
+//   for (let key in obj){
+//     if (typeof obj[key] === 'number')
+//       obj[key] *= 2
+//   }
+// }
+
+
+// multiplyNumeric(menu);
+// console.log(menu)
+
+
+// method 2
+
+// let menu = {
+// 	width: 200,
+// 	height: 300,
+// 	title: "My menu",
+// };
+
+// let multiplyNumeric = (obj) => {
+// 	for (let key in obj) {
+// 		if (!isNaN(obj[key])) obj[key] *= 2;
+// 	}
+// };
+
+// multiplyNumeric(menu);
+// console.log(menu);
+
+///////////////////////////////////////////////////
 
