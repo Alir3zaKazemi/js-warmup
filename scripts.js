@@ -357,8 +357,6 @@
 //   };
 // }
 
-
-
 // let calculator = new Calculator();
 // calculator.read();
 
@@ -409,7 +407,7 @@
 
 ///////////////////////////////////////////////////////////
 
-//object conversion 
+//object conversion
 
 // let user = {
 // 	name: "John",
@@ -427,3 +425,158 @@
 // alert(user + 500);
 
 //////////////////////////////////////////////////////////
+
+// numbers
+
+// let bil = 1_000_000_000;
+// console.log(bil);
+
+// console.log(1.23e6); //1_230_000
+// console.log(1.3e-3);  //0.0013
+
+// console.log(Math.floor(3.56));
+
+// let num = 1.35648;
+// console.log(num.toFixed(2));
+
+///////////////////////////////////////////////////////////
+
+//parseInt and parseFloat
+
+// console.log(parseInt("100px")); // 100
+// console.log(parseInt("100.4px")); // 100
+// console.log(parseFloat("100.4px")); // 100.4
+// console.log(parseFloat("12.5em")); // 12.5
+// console.log(parseInt("12.3")); // 12
+// console.log(parseFloat("12.3.4")); //12.3
+
+////////////////////////////////////////////////////////////
+
+//random number between two numbers
+
+// for (let i = 0; i < 25; i++) {
+// 	console.log(Math.floor(Math.random() * (50 - 20 + 1)) + 20);
+// }
+
+/////////////////////////////////////////////////////////////
+
+// min and max
+
+// console.log(Math.min(-20,60,6,54,3,8,9));  //-20
+// console.log(Math.max(-20,60,6,54,3,8,9));  //60
+
+//////////////////////////////////////////////////////////
+
+///string methods
+
+// console.log("njhgf".length);
+// console.log("njhgf".slice(3)); //gf
+// console.log("njhgf".slice(1,3)); //jh
+// console.log("hello".substr(2,2));
+// console.log("hello".substring(1,4));
+
+/////////////////////////////////////////////////////////
+
+// uppercasing the first character of the string
+
+// function ucFirst(str){
+//   let newStr = str.slice(0,1).toUpperCase() + str.slice(1);
+//   console.log(newStr);;
+// }
+
+// ucFirst("john");
+
+/////////////////////////////////////////////////////////
+
+//
+
+// function truncate(str, maxlength){
+//   let newStr = str.slice(0,maxlength) + "..." ;
+//   console.log(newStr);
+// }
+
+// truncate('alireza',3)
+
+//////////////////////////////////////////////////////////
+
+//extracting number from string
+
+// let num = '';
+
+// function extractNum(str) {
+// 	for (let char of str) {
+// 		if (isFinite(+char)) {
+// 			num += `${char}`;
+// 		}
+// 	}
+//   return num;
+// }
+
+// console.log(+extractNum("$246545sdf8+9"));
+
+/////////////////////////////////////////////////////////
+
+// arrays
+
+// console.log(['ljnhefv','ljeihrv','lijpefv'].length);
+// console.log(['hi',`I'm ali`,'hello'].at(1));
+// console.log(['hi',`I'm ali`,'hello'].at(-1));
+
+// let arr = ["hi", `I'm ali`, "hello"];
+// console.log(arr[arr.length - 1]); //it's because we can set negative values in []
+
+///////////////////////////////////////////////////////
+
+//pop push shift unshift
+
+// let arr = ["apple", "orange", "peach"];
+
+// console.log(arr.pop(), arr);
+// console.log(arr.push('tomato'), arr);
+
+// console.log(arr.shift(), arr);
+// console.log(arr.unshift('banana'), arr);
+
+// console.log(arr.push('jhsf','kjbuef'), arr);
+// console.log(arr.unshift('lihbwproig','354'), arr);
+
+//////////////////////////////////////////////////////
+
+//copying an array reference
+
+// let array1 = [1,2,3];
+// let array2 = array1;
+// array2[1] = 4;
+// console.log(array1); //[1,4,3]
+
+//copying each element of an array to another
+
+// let array1 = [1,2,3];
+// let array2 = [];
+// for(let i in array1){
+//   array2[i] = array1[i]
+// }
+// array2[1] = 4;
+// console.log(array1,array2);
+
+///////////////////////////////////////////////////////
+
+//array to string
+
+// let arr = [1,2];
+// console.log(arr.toString());  //'1,2'
+
+// let arr = [1,2,3];
+// console.log(arr+1);  //'1,2,31'
+
+///////////////////////////////////////////////////////
+
+//array methods
+
+// let arr = [1,2,3];
+
+// arr.splice(1,1);  //from index 1 removes 1 element
+// console.log(arr);  //[1,3]
+
+// arr.splice(0,2,4,5); //from index 0 removes 1 element and adds two new string element
+// console.log(arr); //['new elem','second new elem',2,3]
