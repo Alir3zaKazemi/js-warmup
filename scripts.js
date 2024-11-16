@@ -571,12 +571,78 @@
 
 ///////////////////////////////////////////////////////
 
-//array methods
+//  .splice()
 
-// let arr = [1,2,3];
+// let arr = [1,2,3]; //referenced array for testing arr methods
 
 // arr.splice(1,1);  //from index 1 removes 1 element
 // console.log(arr);  //[1,3]
 
-// arr.splice(0,2,4,5); //from index 0 removes 1 element and adds two new string element
+// arr.splice(0,2,4,5); //from index 0 removes 1 element and adds two new elements
 // console.log(arr); //['new elem','second new elem',2,3]
+
+// arr.splice(1,0,7,8);
+// console.log(arr);   //[1,7,8,2,3]
+// console.log(arr.splice(2,3,9));  //[8,2,3]
+// console.log(arr);  //[1,7,9]
+
+//////////////////////////////////////
+
+//  .slice()
+
+// let arr = [1,2,3,4];
+// console.log(arr.slice(1,3));  //[2,3]
+// console.log(arr.slice(1));  //[2,3,4]
+
+// let arr = [1, 2, 3, 4];
+// let brr = arr.slice(); //copying array to sth else
+// brr[2] = 6; //it wont change the otherone
+// console.log(brr, arr); //[1,2,6,4] -- [1,2,3,4]
+
+// let arr1 = [1,2];
+// let arr2 = [4,6,8];
+// console.log(arr1.concat(arr2));  //[1,2,4,6,8]
+// console.log(arr1, arr2);   //[1,2] -- [4,6,8]
+// console.log(arr1.concat(10,35,69));  //[1,2,10,35,69]
+// console.log(arr2.concat([10,35,69]));  //[4,6,8,10,35,69]
+
+// .forEach()
+
+// let array = [1,2,3];
+// array.forEach((item, index, array) => {
+//   console.log(`so ${item} is at index ${index} of the [${array}]`);
+// })
+
+// .find()
+
+// let users = [
+// 	{ id: 1, name: "John" },
+// 	{ id: 2, name: "Pete" },
+// 	{ id: 3, name: "Mary" },
+// ];
+
+// let user = users.find((item) => item.id == 1);
+// console.log(user.name);
+// console.log(users.find(item => item.id == 3));
+
+// .filter()  .map()
+
+// let users = [
+// 	{ id: 1, name: "John" },
+// 	{ id: 2, name: "Peter" },
+// 	{ id: 3, name: "Mary" },
+// ];
+
+// console.log(users.filter(item => item.id < 3));  //[{id: 1, name: "John"}, {id: 2, name: "Pete"}]
+
+// console.log(users.map(item => item.name.length)); //[4,4,4]
+
+//////////////////////////////////////////////////////////
+
+// .sort()
+
+// let arr = [1,15,22,8,10];
+// console.log(arr.sort());  //[1, 10, 15, 22, 8]
+// console.log(arr.sort((a, b) => (a > b ? 1 : b > a ? -1 : 0)));  //[1, 8, 10, 15, 22]
+
+
