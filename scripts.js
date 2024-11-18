@@ -645,4 +645,307 @@
 // console.log(arr.sort());  //[1, 10, 15, 22, 8]
 // console.log(arr.sort((a, b) => (a > b ? 1 : b > a ? -1 : 0)));  //[1, 8, 10, 15, 22]
 
+// .split()
+
+// let names = "john, peter, ali";
+// let arrNames = names.split(', ');
+// console.log(arrNames);
+
+// let names = "john, peter, ali";
+// let arrNames = names.split(', ',2);
+// console.log(arrNames);
+
+//.join()
+
+// let arr = ['ali', 'john'];
+// let str = arr.join(';');
+// console.log(str);
+
+//.reduce()
+
+// let arr = [1,2,3];
+// let result = arr.reduce((multiple, item) => multiple * item, 1);
+
+// console.log(result);  //6
+
+//////////////////////////////////////////////////////////
+
+// Important (to CamelCase)
+
+// let str = "my-very-first-code";
+// console.log(toCamel(str));
+
+// function toCamel(string) {
+// 	return string
+// 		.split("-")
+// 		.map((word, index) => {
+// 			return index == 0 ? word : word[0].toUpperCase() + word.slice(1);
+// 		})
+// 		.join('');
+// }
+
+//////////////////////////////////////////////////////////
+
+//Important
+
+// let arr = [5,3,8,1];
+// let filtered = filterRange(arr, 1 ,4);
+
+// function filterRange(array, x, y){
+//   return array.filter(item => item >= x && item < y ? item : null)
+// }
+
+// console.log(filtered);  // [3,1]
+// console.log(arr);  // [5,3,8,1]
+
+//////////////////////////////////////////////////////////
+
+//Important
+
+// let arr = [5, 3, 8, 1];
+
+// function filterRangeInPlace(array, low, high) {
+// 	let filterd = [];
+// 	let filterArr = [];
+// 	filterArr = array.map((item) => {
+// 		if (item >= low && item <= high) {
+// 			filterd.push(item);
+// 		}
+// 	});
+
+// 	return filterd;
+// }
+
+// console.log(filterRangeInPlace(arr, 1, 4));
+
+//////////////////////////////////////////////////////////
+
+// .sort()
+
+// let arr = [5, 2, 1, -10, 8];
+// arr.sort((a, b) => b - a
+// );
+// console.log(arr);
+
+/////////////////////////////////////////////////////////
+
+// .sort()  without modifying the original array
+
+// let arr = ["HTML", "JavaScript", "CSS"];
+
+// let sorted = copySorted(arr);
+
+// function copySorted(array){
+//   return array.slice().sort();
+// }
+
+// console.log(sorted);
+// console.log(arr);
+
+//////////////////////////////////////////////////////////
+
+//very Important
+
+// let calc = new Calculator();
+// let powerCalc = new Calculator();
+// powerCalc.addMethod("*", (a, b) => a * b);
+// powerCalc.addMethod("/", (a, b) => a / b);
+// // powerCalc.addMethod("**", (a, b) => a ** b);
+// function Calculator() {
+// 	this.methods = {
+// 		"-": (a, b) => a - b,
+// 		"+": (a, b) => a + b,
+// 	};
+
+// 	this.calculate = function (str) {
+// 		let split = str.split(" "),
+// 			a = +split[0],
+// 			op = split[1],
+// 			b = +split[2];
+
+// 		if (!this.methods[op] || isNaN(a) || isNaN(b)) {
+// 			return NaN;
+// 		}
+
+// 		return this.methods[op](a, b);
+// 	};
+
+// 	this.addMethod = function (name, func) {
+// 		this.methods[name] = func;
+// 	};
+// }
+
+// console.log(powerCalc.calculate("2 ** 3"));
+// console.log(calc.calculate("3 + 7"));
+
+//////////////////////////////////////////////////////////
+
+// iterating an object which is not iterable
+
+// let range = {
+// 	from: 1,
+// 	to: 5,
+
+// 	[Symbol.iterator]() {
+// 		this.current = this.from;
+// 		return this;
+// 	},
+
+// 	next() {
+// 		if (this.current <= this.to) {
+// 			return { done: false, value: this.current++ };
+// 		} else {
+// 			return { done: true };
+// 		}
+// 	},
+// };
+
+// for(let num of range){
+//   console.log(num);
+// }
+
+//////////////////////////////////////////////////////////
+
+// making an array from an object
+
+// let arrayLike = {
+//   0: "Hello",
+//   1: "World",
+//   length: 2
+// };
+
+// console.log(arrayLike);
+// let arr = Array.from(arrayLike); // (*)
+// console.log(arr);    //[Hello, World]
+
+//////////////////////////////////////////////////////////
+
+// making an array from a string
+
+// let str = "iugeifv";
+// let arr = Array.from(str);
+// console.log(arr);
+
+//////////////////////////////////////////////////////////
+
+// map
+
+// let map = new Map();
+
+// map.set('1', 'str1');   // a string key
+// map.set(1, 'num1');     // a numeric key
+// map.set(true, 'bool1'); // a boolean key
+
+//////////////////////////////////////
+
+// let john = { name: "John" };
+
+// // for every user, let's store their visits count
+// let visitsCountMap = new Map();
+
+// // john is the key for the map
+// visitsCountMap.set(john, 123);
+// console.log(visitsCountMap);
+// console.log( visitsCountMap.get(john) ); // 123
+
+///////////////////////////////////////
+
+// iterates on maps
+
+// let recipeMap = new Map([
+// 	["cucumber", 500],
+// 	["tomatoes", 350],
+// 	["onion", 50],
+// ]);
+
+// // iterate over keys (vegetables)
+// for (let vegetable of recipeMap.keys()) {
+// 	console.log(vegetable); // cucumber, tomatoes, onion
+// }
+
+// // iterate over values (amounts)
+// for (let amount of recipeMap.values()) {
+// 	console.log(amount); // 500, 350, 50
+// }
+
+// // iterate over [key, value] entries
+// for (let entry of recipeMap) {
+// 	// the same as of recipeMap.entries()
+// 	console.log(entry); // cucumber,500 (and so on)
+// }
+
+// recipeMap.forEach((value, key) => {
+// 	console.log(`${key}: ${value}`); // cucumber: 500 etc
+// });
+
+//////////////////////////////////////////////////////////
+
+// object to map
+
+// let obj = {
+// 	name: "John",
+// 	age: 30,
+// };
+
+// let map = new Map(Object.entries(obj));
+// console.log(Object.entries(obj));
+// console.log(map);
+// console.log(map.get('name'));
+
+//////////////////////////////////////////////////////////
+
+//  map to object
+
+// let prices = new Map([
+// 	["banana", 1],
+// 	["orange", 2],
+// 	["meat", 4],
+// ]);
+
+// let objFromMap = Object.fromEntries(prices);
+// console.log(objFromMap);
+// console.log(objFromMap.orange);
+
+//////////////////////////////////////////////////////////
+
+// Important
+
+// function aclean(arr) {
+// 	let map = new Map();
+
+// 	for (let word of arr) {
+// 		// split the word by letters, sort them and join back
+// 		let sorted = word.toLowerCase().split("").sort().join(""); // (*)
+// 		map.set(sorted, word);
+// 	}
+
+// 	return Array.from(map.values());
+// }
+
+// let arr = ["nap", "teachers", "cheaters", "PAN", "ear", "era", "hectares"];
+
+// console.log(aclean(arr));
+
+//////////////////////////////////////////////////////////
+
+//array from msp keys
+
+// let map = new Map();
+
+// map.set("name", "John");
+// console.log(map);
+// let keys = Array.from(map.keys());
+// keys.push("more");
+// console.log(keys);
+
+//////////////////////////////////////////////////////////
+
+//
+
+
+
+
+
+
+
 
