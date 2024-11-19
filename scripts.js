@@ -940,12 +940,196 @@
 
 //////////////////////////////////////////////////////////
 
-//
+// accessing a null object from map
 
+// let john = { name: "John" };
 
+// let map = new Map();
+// map.set(john, "...");
 
+// john = null;
 
+// console.log(map.keys());
+// console.log(map.values());
+// console.log(map.entries());
 
+//////////////////////////////////////////////////////////
 
+// destructuring assignment
 
+// let [one,two,three] = new Set([1,2,3]);
+// console.log(two);  //2
+
+// let [firstName, , surname] = ['alireza', 'kazemi','kazem'];
+// console.log(surname);  //kazem
+
+// let user = {};
+// [user.name, user.surname] = "John Smith".split(" ");
+// console.log(user);
+// console.log(user.name);
+
+// ...rest
+
+// let [name1, name2, ...rest] = ['ali', 'mmd', 'john', 'peter'];
+// console.log(rest);  //['john', 'peter']
+// console.log(rest[1]);  //peter
+
+// switching values
+
+// let user = 'ali';
+// let admin = 'john';
+// [user, admin] = [admin, user];
+// console.log(admin);  //ali
+
+//////////////////////////////////////////////////////////
+
+//destructuring objects
+
+// let { height, width, title } = { title: "Menu", height: 200, width: 100 };
+
+// console.log(width);
+
+// let obj = {
+// 	title: "menu",
+// };
+
+// let { width: w = 100, height: h = 200, title } = obj;
+// console.log(w);  //100
+
+/////////////////////////////////////////////////////////
+
+// ...rest in object destructuring
+
+// let options = {
+//   title: "Menu",
+//   height: 200,
+//   width: 100
+// };
+
+// // title = property named title
+// // other = object with the other of properties
+// let {title, ...other} = options;
+
+// // now title="Menu", other={height: 200, width: 100}
+// console.log(other);  // {height:200, width:100}
+// console.log(other.width);   // 100
+
+/////////////////////////////////////////////////////////
+
+// let options = {
+// 	size: {
+// 		width: 100,
+// 		height: 200,
+// 	},
+// 	items: ["Cake", "Donut"],
+// 	extra: true,
+// };
+
+// // destructuring assignment split in multiple lines for clarity
+// let {
+// 	size: {
+// 		// put size here
+// 		width,
+// 		height,
+// 	},
+// 	items: [item1, item2], // assign items here
+// 	title = "Menu", // not present in the object (default value is used)
+// } = options;
+
+// console.log(width);  //100
+
+/////////////////////////////////////////////////////////
+
+// JSON
+
+// let obj = {
+//   name: 'ali',
+//   age: 25,
+// }
+
+// let objJson = JSON.stringify(obj);
+
+// console.log(objJson);
+
+/////////////////////////////////////////////////////////
+
+//JSON error
+
+// let room = {
+//   number: 23
+// };
+
+// let meetup = {
+//   title: "Conference",
+//   participants: ["john", "ann"]
+// };
+
+// meetup.place = room;       // meetup references room
+// room.occupiedBy = meetup; // room references meetup
+// console.log(room);
+// console.log(JSON.stringify(room));  //error
+
+/////////////////////////////////////////////////////////
+
+//figuring json error
+
+// let room = {
+// 	number: 23,
+// };
+
+// let meetup = {
+// 	title: "Conference",
+// 	participants: [{ name: "John" }, { name: "Alice" }],
+// 	place: room, // meetup references room
+// };
+
+// room.occupiedBy = meetup; // room references meetup
+
+// console.log(
+// 	JSON.stringify(meetup, function replacer(key, value) {
+// 		console.log(`${key}: ${value}`);
+// 		return key == "occupiedBy" ? undefined : value;
+// 	},2)  //this 2 is for better looking output like in cosole
+// );
+
+/////////////////////////////////////////////////////////
+
+// JSON.parse()
+
+// let numbers = "[0, 1, 2, 3]";
+// numbers = JSON.parse(numbers);
+// console.log( numbers[1] ); // 1
+
+/////////////////////////
+
+// let userData = '{ "name": "John", "age": 35, "isAdmin": false, "friends": [0,1,2,3] }';
+
+// let user = JSON.parse(userData);
+
+// console.log( user.friends[1] ); // 1
+
+/////////////////////////////////////////////////////////
+
+// error in JSON.parse
+
+// let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
+
+// let meetup = JSON.parse(str);
+
+// console.log( meetup.date.getDate() ); // Error!
+
+///////////////////////////////////////
+
+// fixing json.parse error
+
+// let str = '{"title":"Conference","date":"2017-11-30T12:00:00.000Z"}';
+
+// let meetup = JSON.parse(str, function(key, value) {
+//   if (key == 'date') return new Date(value);
+//   return value;
+// });
+
+// console.log( meetup.date.getDate() ); // now works!
+
+/////////////////////////////////////////////////////////
 
