@@ -1133,3 +1133,346 @@
 
 /////////////////////////////////////////////////////////
 
+// recursion
+
+// function inBetween(a, b) {
+// 	return (x) => x >= a && x <= b;
+// }
+// let arr = [1,2,3,4,5,6,7,8,9]
+// console.log(arr.filter(inBetween(3,6)));
+
+/////////////////////////////////////////////////////////
+
+// function checking arg
+
+// function ask(question, ...handlers) {
+// 	let isYes = confirm(question);
+// 	for (let handler of handlers) {
+//     if (handler.length == 0) {
+//       //checking func arg length
+// 			if (isYes) handler();
+// 		} else {
+// 			handler(isYes);
+// 		}
+// 	}
+// }
+
+// // for positive answer, both handlers are called
+// // for negative answer, only the second one
+// ask(
+// 	"Question?",
+// 	() => console.log("You said yes"),
+// 	(result) => console.log(result)
+// );
+
+////////////////////////////////////////////////////////
+
+// Important
+
+// function makeCounter() {
+
+//   function counter() {
+//     return counter.count++;
+//   };
+
+//   counter.count = 0;
+
+//   return counter;
+// }
+
+// let counter = makeCounter();
+
+// counter.count = 10;
+// counter();
+// console.log( counter() ); // 10
+
+/////////////////////////////////////////////////////////
+
+// Important,
+
+// let sayHi = function func(who) {
+//   if (who) {
+//     console.log(`Hello, ${who}`);
+//   } else {
+//     func("Guest"); // use func to re-call itself
+//   }
+// };
+
+// sayHi(); // Hello, Guest
+
+// // But this won't work:
+// func(); // Error, func is not defined (not visible outside of the function)
+
+///////////////////////////////
+
+// let sayHi = function(who) {
+//   if (who) {
+//     console.log(`Hello, ${who}`);
+//   } else {
+//     sayHi("Guest"); // Error: sayHi is not a function
+//   }
+// };
+
+// let welcome = sayHi;
+// sayHi = null;
+
+// welcome(); // Error, the nested sayHi call doesn't work any more!
+
+///////////////////////////////
+
+// to fix that
+
+// let sayHi = function func(who) {
+//   if (who) {
+//     console.log(`Hello, ${who}`);
+//   } else {
+//     func("Guest"); // Now all fine
+//   }
+// };
+
+// let welcome = sayHi;
+// sayHi = null;
+
+// welcome(); // Hello, Guest (nested call works)
+
+/////////////////////////////////////////////////////////
+
+// very important
+
+// function sum(a) {
+
+//   let currentSum = a;
+
+//   function f(b) {
+//     currentSum += b;
+//     return f;
+//   }
+
+//   // for showing in alert
+//   f.toString = function() {
+//     return currentSum;
+//   };
+
+//   return f;
+// }
+
+// alert( sum(1)(2) ); // 3
+// alert( sum(5)(-1)(2) ); // 6
+// alert( sum(6)(-1)(-2)(-3) ); // 0
+// alert( sum(0)(1)(2)(3)(4)(5) ); // 15
+
+/////////////////////////////////////////////////////////
+
+// setTimeout
+
+// let timerId = setTimeout(() => alert("never happens"), 1000);
+// console.log(timerId); // timer identifier
+
+// clearTimeout(timerId);  //cancels the setTimeout of timeId
+// console.log(timerId); // same identifier (doesn't become null after canceling)
+
+//////////////////////////////////////
+
+// repeat with the interval of 1 seconds
+// let timerId = setInterval(() => console.log('tick'), 1000);
+
+// // after 10 seconds stop
+// setTimeout(() => { clearInterval(timerId); console.log('stop'); }, 10000);
+
+//////////////////////////////////////
+
+// alternative way for interval
+
+// let timerId = setTimeout(function tick() {
+// console.log("tick");
+// setTimeout(tick, 2000); // (*)
+// }, 5000);
+
+///////////////////////////////////////
+
+// zero delay setTimeout
+
+// setTimeout(() => console.log('world'));
+// console.log('hello');
+
+//out put is fist 'hello' and then 'world'
+
+////////////////////////////////////////
+
+// important
+
+// function printNumbers(from, to) {
+// 	let current = from;
+
+// 	function go() {
+// 		console.log(current);
+// 		if (current == to) {
+// 			clearInterval(timerId);
+// 		}
+// 		current++;
+// 	}
+
+// 	// go();  //being this makes the first output to be shown faster than the case that we dont write go()
+// 	let timerId = setInterval(go, 1000);
+// }
+
+// printNumbers(5, 10);
+
+//////////////////////////////////////////
+
+//important
+
+// function printNumbers(from, to) {
+// 	let current = from;
+
+// 	setTimeout(function go() {
+// 		console.log(current);
+// 		if (current < to) {
+// 			setTimeout(go, 1000);
+// 		} else {
+// 			setTimeout(() => console.log("finished"), 1000);
+// 		}
+
+// 		current++;
+// 	}, 1000);
+// }
+
+// // usage:
+// printNumbers(5, 12);
+
+///////////////////////////////////////////////////////
+
+// decorators
+
+// function slow(x) {
+// 	// there can be a heavy CPU-intensive job here
+// 	console.log(`Called with ${x}`);
+// 	return x;
+// }
+
+// function cachingDecorator(func) {
+//   let cache = new Map();
+
+//   return function(x) {
+//     if (cache.has(x)) {    // if there's such key in cache
+//       return cache.get(x); // read the result from it
+//     }
+
+//     let result = func(x);  // otherwise call func
+
+//     cache.set(x, result);  // and cache (remember) the result
+//     return result;
+//   };
+// }
+
+// slow = cachingDecorator(slow);  //the func syntax of slow has been changed and modified, if its the first time call the original slow func will run otherwise the result will be read from the cache
+// console.log(slow);
+// console.log( slow(1) ); // slow(1) is cached and the result returned
+// console.log( "Again: " + slow(1) ); // slow(1) result returned from cache
+
+// console.log( slow(2) ); // slow(2) is cached and the result returned
+// console.log( "Again: " + slow(2) ); // slow(2) result returned from cache
+
+
+/////////////////////////////////////////////////////////
+
+// decorators for objects which have methods
+
+// let worker = {
+//   someMethod() {
+//     return 1;
+//   },
+
+//   slow(x) {
+//     console.log("Called with " + x);
+//     return x * this.someMethod(); // (*)
+//   }
+// };
+
+// function cachingDecorator(func) {
+//   let cache = new Map();
+//   return function(x) {
+//     if (cache.has(x)) {
+//       return cache.get(x);
+//     }
+//     let result = func.call(this, x); // "this" is passed correctly now
+//     cache.set(x, result);
+//     return result;
+//   };
+// }
+
+// worker.slow = cachingDecorator(worker.slow); // now make it caching
+
+// console.log( worker.slow(2) ); // works
+// console.log( worker.slow(2) ); // works, doesn't call the original (cached)
+
+////////////////////////////////////////////////////////
+
+// decorating an object method which has more than one argument
+
+// let worker = {
+//   slow(min, max) {
+//     console.log(`Called with ${min},${max}`);
+//     return min + max;
+//   }
+// };
+
+// function cachingDecorator(func, hash) {
+//   let cache = new Map();
+//   return function() {
+//     let key = hash(arguments); // (*)
+//     if (cache.has(key)) {
+//       return cache.get(key);
+//     }
+
+//     let result = func.call(this, ...arguments); // (**)
+//     cache.set(key, result);
+//     return result;
+//   };
+// }
+
+// function hash(args) {
+//   return args[0] + ',' + args[1];
+// }
+
+// worker.slow = cachingDecorator(worker.slow, hash);
+
+// console.log( worker.slow(3, 5) ); // works
+// console.log( "Again " + worker.slow(3, 5) ); // same (cached)
+
+/////////////////////////////////////////////////////////
+
+//  function binding
+
+// let user = {
+//   firstName: "John"
+// };
+
+// function func() {
+//   console.log(this.firstName);
+// }
+
+// let funcUser = func.bind(user);
+// funcUser();
+
+
+////////////////////////////////////
+
+// object method binding
+
+// let user = {
+//   firstName: "John",
+//   sayHi() {
+//     console.log(`Hello, ${this.firstName}!`);
+//   }
+// };
+
+// let sayHi = user.sayHi.bind(user); // (*)
+
+// // can run it without an object
+// sayHi(); // Hello, John!
+
+// setTimeout(sayHi, 1000); // Hello, John!
+
+/////////////////////////////////////////////////////
+
