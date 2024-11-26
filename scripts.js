@@ -1373,7 +1373,6 @@
 // console.log( slow(2) ); // slow(2) is cached and the result returned
 // console.log( "Again: " + slow(2) ); // slow(2) result returned from cache
 
-
 /////////////////////////////////////////////////////////
 
 // decorators for objects which have methods
@@ -1455,7 +1454,6 @@
 // let funcUser = func.bind(user);
 // funcUser();
 
-
 ////////////////////////////////////
 
 // object method binding
@@ -1475,4 +1473,115 @@
 // setTimeout(sayHi, 1000); // Hello, John!
 
 /////////////////////////////////////////////////////
+
+// DOM
+
+// let title = document.querySelector('#title');
+// title.style.color = 'red';
+// title.style.fontSize = '32px';
+// title.style.fontWeight = 'bold';
+// title.style.textTransform = 'capitalize';
+
+///////////////////////////////
+
+// manipulating elements in html
+
+// let olList = document.getElementById('list');
+// olList.before('<p>beginig</p>');
+// olList.prepend('Hi');
+// let newLi = document.createElement('li');
+// newLi.textContent='im an elem';
+// olList.append(newLi);
+// olList.insertAdjacentHTML('afterbegin','<li>adjacent</li>')
+
+/////////////////////////////////
+
+//adding an element and removing with setTimeout
+
+// let newDiv = document.createElement("div");
+// newDiv.innerHTML =
+// 	"<h2> new div </h2><hr><p>jnvfeojnvonsofnvslknfvlskjnljvnljnlsfjnlknl<br>dfvnodjnfvonoisdnvosindvoinsoidnvosinlknlkms dlvnoniosdnvinsdvnl<br>dfvnouendovnosidnv</p>";
+
+// document.body.append(newDiv);
+
+// // setTimeout(() => newDiv.setAttribute('hidden',''), 2500);
+// // or
+// setTimeout(()=>newDiv.remove(), 2500);
+
+//////////////////////////////////////////
+
+// best way of clearing whole chikdren of an element
+
+// let list = document.getElementById('list')
+// list.innerHTML=''
+
+/////////////////////////////////////////////
+
+// create li list from prompt
+
+// let input = '' ;
+// let list = document.getElementById('list');
+
+
+
+// do {
+//   input = prompt('enter')
+//   let li = document.createElement('li');
+//   li.textContent = input;
+//   list.append(li);
+// } while (input);
+
+///////////////////////////////////////////
+
+// ***********
+
+// let data = {
+// 	Fish: {
+// 		trout: {},
+// 		salmon: {},
+// 	},
+
+// 	Tree: {
+// 		Huge: {
+// 			sequoia: {},
+// 			oak: {},
+// 		},
+// 		Flowering: {
+// 			"apple tree": {},
+// 			magnolia: {},
+// 		},
+// 	},
+// };
+
+// function createTree(container, obj) {
+// 	container.append(createTreeDom(obj));
+// }
+
+
+// function createTreeDom(obj){
+
+//   let ul = document.createElement('ul');
+
+//   for( let key in obj){
+//     let li = document.createElement('li');
+//     li.textContent = key;
+//     ul.append(li);
+
+
+//     let childLi = createTreeDom(obj[key]);
+//     console.log(childLi);
+//     li.append(childLi)
+
+//   }
+
+
+
+//   return ul;
+// }
+
+// let container = document.getElementById("container");
+// createTree(container, data);
+
+
+////////////////////////////////////////////////
 
