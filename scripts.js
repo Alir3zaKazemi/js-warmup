@@ -1585,3 +1585,137 @@
 
 ////////////////////////////////////////////////
 
+// cloning an object and defining property
+
+// let obj = {
+//   name : 'john',
+//   second : 123
+// }
+
+// let clone = Object.defineProperties({},Object.getOwnPropertyDescriptors(obj));
+
+
+// Object.defineProperty(clone, 'age', {
+//   value : 25
+// })
+
+// console.log(clone);
+
+/////////////////////////////
+
+//defining properties
+
+// let obj = {};
+
+// Object.defineProperties(obj,{
+//   name:{value : 'ali'},
+//   age:{value : 24},
+//   gender: {value : 'male'}
+// })
+
+// console.log(obj);
+
+
+//////////////////////////////////////////////////
+
+// get and set in objects
+
+// let user = {
+//   name: "John",
+//   surname: "Smith",
+
+//   get fullName() {
+//     return `${this.name} ${this.surname}`;
+//   },
+
+//   set fullName(value) {
+//     [this.name, this.surname] = value.split(" ");
+//   }
+// };
+
+// // user before modifying
+// console.log(user);
+
+// // before setting value for fullName
+// console.log(user.fullName);
+
+// // set fullName is executed with the given value.
+// user.fullName = "Alice Cooper";
+
+// console.log(user.name); // Alice
+// console.log(user.surname); // Cooper
+
+// console.log(user);
+
+///////////////////////////////////////////////////
+
+// prototype in objects
+
+// let animal = {
+//   eats: true
+// };
+// let rabbit = {
+//   jumps: true
+// };
+
+// rabbit.__proto__ = animal; // (*)
+
+// // we can find both properties in rabbit now:
+// console.log( rabbit.eats ); // true (**)
+// console.log( rabbit.jumps ); // true
+
+//////////////////////////
+
+// __proto__
+
+// let user = {
+// 	name: "John",
+// 	surname: "Smith",
+
+// 	set fullName(value) {
+// 		[this.name, this.surname] = value.split(" ");
+// 	},
+
+// 	get fullName() {
+// 		return `${this.name} ${this.surname}`;
+// 	},
+// };
+
+// let admin = {
+// 	__proto__: user,
+// 	isAdmin: true,
+// };
+
+// admin.name = 'alireza';
+// console.log(admin.fullName);  //alireza smith
+
+///////////////////////////////////////////////////
+
+// modern way of setting prototype
+
+// let animal = {
+//   eats : true
+// };
+
+// let rabbit = Object.create(animal);
+
+// console.log(rabbit.eats);  //true
+
+///////////////////////////////////////////////////
+
+// object.create with more properties
+
+// let animal = {
+// 	eats: true,
+// };
+
+// let rabbit = Object.create(animal, {
+// 	jumps: {
+// 		value: true,
+// 	},
+// });
+
+// console.log(rabbit.jumps);
+
+//////////////////////////////////////////////////
+
