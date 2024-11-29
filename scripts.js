@@ -1522,8 +1522,6 @@
 // let input = '' ;
 // let list = document.getElementById('list');
 
-
-
 // do {
 //   input = prompt('enter')
 //   let li = document.createElement('li');
@@ -1557,7 +1555,6 @@
 // 	container.append(createTreeDom(obj));
 // }
 
-
 // function createTreeDom(obj){
 
 //   let ul = document.createElement('ul');
@@ -1567,21 +1564,17 @@
 //     li.textContent = key;
 //     ul.append(li);
 
-
 //     let childLi = createTreeDom(obj[key]);
 //     console.log(childLi);
 //     li.append(childLi)
 
 //   }
 
-
-
 //   return ul;
 // }
 
 // let container = document.getElementById("container");
 // createTree(container, data);
-
 
 ////////////////////////////////////////////////
 
@@ -1593,7 +1586,6 @@
 // }
 
 // let clone = Object.defineProperties({},Object.getOwnPropertyDescriptors(obj));
-
 
 // Object.defineProperty(clone, 'age', {
 //   value : 25
@@ -1614,7 +1606,6 @@
 // })
 
 // console.log(obj);
-
 
 //////////////////////////////////////////////////
 
@@ -1719,3 +1710,68 @@
 
 //////////////////////////////////////////////////
 
+// try catch
+
+// try {
+//   const x = 1235;
+//   x = 4568;
+// } catch (error) {
+//   console.log(error.name);
+//   console.log(error.message);
+//   console.log(error.stack);
+// }
+
+/////////////////////////////
+
+// throw
+
+// let json = '{ "age": 30 }'; // incomplete data
+
+// try {
+// 	let user = JSON.parse(json); // <-- no errors
+
+// 	if (!user.name) {
+// 		throw new SyntaxError("Incomplete data: no name"); // (*) jumps to the catch
+// 	}
+
+// 	console.log(user.name);
+// } catch (err) {
+// 	console.log("JSON Error: " + err.message); // JSON Error: Incomplete data: no name
+// }
+
+//////////////////////////////////
+
+//3543544********
+
+// function readData() {
+//   let json = '{ "age": 30 }'; // incomplete data
+//   try {
+// 		let user = JSON.parse(json);
+    
+// 		if (!user.name) {
+//       throw new SyntaxError("Incomplete data: no name");
+// 		}
+    
+//     blabla(); // unexpected error
+
+// 		console.log(user.name);
+//   } catch (err) {
+// 		if (err instanceof SyntaxError) {
+// 			console.log("JSON Error: " + err.message);
+// 		}
+// 		if (!(err instanceof SyntaxError)) {
+// 			throw err; // rethrow (don't know how to deal with it)
+// 		}
+//   }
+// }
+
+
+// try {
+// 	readData();
+// } catch (err) {
+// 	console.log("External catch got: " + err); // caught it!
+// }
+
+///////////////////////////////////////////////////
+
+ 
