@@ -804,6 +804,8 @@
 //   console.log(num);
 // }
 
+//////check generator function section
+
 //////////////////////////////////////////////////////////
 
 // making an array from an object
@@ -1747,11 +1749,11 @@
 //   let json = '{ "age": 30 }'; // incomplete data
 //   try {
 // 		let user = JSON.parse(json);
-    
+
 // 		if (!user.name) {
 //       throw new SyntaxError("Incomplete data: no name");
 // 		}
-    
+
 //     blabla(); // unexpected error
 
 // 		console.log(user.name);
@@ -1765,7 +1767,6 @@
 //   }
 // }
 
-
 // try {
 // 	readData();
 // } catch (err) {
@@ -1774,4 +1775,67 @@
 
 ///////////////////////////////////////////////////
 
- 
+// generator functions
+
+// function* generateSequence() {
+// 	yield 1;
+// 	yield 2;
+// 	return 3;
+// }
+
+// let generator = generateSequence();
+
+// let one = generator.next();
+// let two = generator.next();
+// let three = generator.next();
+
+// console.log(one);  //{value: 1, done: false}
+// console.log(two);  //{value: 2, done: false}
+// console.log(three);    //{value: 3, done: true}
+
+/////////////////////////////
+
+//better way for making an object iterable **
+
+// let range = {
+//   from: 1,
+//   to: 5,
+
+//   *[Symbol.iterator]() { // a shorthand for [Symbol.iterator]: function*()
+//     for(let value = this.from; value <= this.to; value++) {
+//       yield value;
+//     }
+//   }
+// };
+
+// console.log( [...range] ); // 1,2,3,4,5
+
+/////////////////////////////////////////////
+
+// yield*
+
+// function* generateSequence(start, end) {
+// 	for (let i = start; i <= end; i++) yield i;
+// }
+
+// function* generatePasswordCodes() {
+// 	// 0..9
+// 	yield* generateSequence(48, 57);
+
+// 	// A..Z
+// 	yield* generateSequence(65, 90);
+
+// 	// a..z
+// 	yield* generateSequence(97, 122);
+// }
+
+// let str = "";
+
+// for (let code of generatePasswordCodes()) {
+// 	str += String.fromCharCode(code);
+// }
+
+// console.log(str);
+
+/////////////////////////////////////////////////
+
