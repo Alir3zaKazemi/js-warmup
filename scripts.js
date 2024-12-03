@@ -1867,7 +1867,6 @@
 // 	}
 // })();
 
-
 /////////////////////////////////////////////
 
 // yield*
@@ -1896,4 +1895,263 @@
 // console.log(str);
 
 /////////////////////////////////////////////////
+
+// proxy
+
+// let dictionary = {
+// 	Hello: "Hola",
+// 	Bye: "Adiós",
+// };
+
+// dictionary = new Proxy(dictionary, {
+// 	get(target, phrase) {
+// 		// intercept reading a property from dictionary
+// 		if (phrase in target) {
+// 			// if we have it in the dictionary
+// 			return target[phrase]; // return the translation
+// 		} else {
+// 			// otherwise, return the non-translated phrase
+// 			return 'not translated';
+// 		}
+// 	},
+// });
+
+// console.log(dictionary.Hello);  //Hola
+// console.log(dictionary['Bye']); //Adiós
+// console.log(dictionary.welcome);  //not translated
+
+///////////////////////////////////
+
+// let numbers = [];
+
+// numbers = new Proxy(numbers, { // (*)
+//   set(target, prop, val) { // to intercept property writing
+//     if (typeof val == 'number') {
+//       target[prop] = val;
+//       return true;  //(*)
+//     } else {
+//       return false; //(*)
+//     }
+//   }
+// });
+
+// numbers.push(1); // added successfully
+// numbers.push(2); // added successfully
+// console.log(numbers);
+// numbers.push('test');  //TypeError
+// console.log('never reach here');  //because of error above
+
+////////////////////////////////////
+
+// iterating on object with ownKeys
+
+// let user = {
+//   name: "John",
+//   age: 30,
+//   _password: "***"
+// };
+
+// user = new Proxy(user, {
+//   ownKeys(target) {
+//     return Object.keys(target).filter(key => !key.startsWith('_'));
+//   }
+// });
+
+// // "ownKeys" filters out _password
+// for(let key in user) console.log(key);
+
+// console.log(Object.keys(user));  //['name', 'age']
+// console.log(Object.values(user));  //['John', 30]
+
+/////////////////////////////////////////
+
+// that would be error if we return a key that doesnt exist in object
+
+// let user = {};
+
+// user = new Proxy(user, {
+// 	ownKeys(target) {
+// 		return ["a", "b", "c"];
+// 	},
+// });
+
+// console.log(Object.keys(user));  //[] empty
+
+//////////////////
+
+// as its empty, its descriptor is empty too so we should set 'enumerable flag' to true
+
+// let user = {};
+
+// user = new Proxy(user, {
+// 	ownKeys(target) {
+// 		// called once to get a list of properties
+// 		return ["a", "b", "c"];
+// 	},
+
+// 	getOwnPropertyDescriptor(target, prop) {
+// 		// called for every property
+// 		return {
+// 			enumerable: true,
+// 			configurable: true,
+// 			/* ...other flags, probable "value:..." */
+// 		};
+// 	},
+// });
+
+// console.log(Object.keys(user));  //['a', 'b', 'c']
+
+////////////////////////////////////////////
+
+// protecting a key on proxied object
+
+// let user = {
+// 	name: "John",
+// 	_password: "***",
+// };
+
+// user = new Proxy(user, {
+// 	get(target, prop) {
+// 		if (prop.startsWith("_")) {
+// 			throw new Error("Access denied");
+// 		}
+// 		let value = target[prop];
+// 		return typeof value === "function" ? value.bind(target) : value; // (*)  its becuase if we want to get password with object methods, then we should set the target of 'this' to the proxied user 
+// 	},
+
+// 	set(target, prop, val) {
+// 		// to intercept property writing
+// 		if (prop.startsWith("_")) {
+// 			throw new Error("Access denied");
+// 		} else {
+// 			target[prop] = val;
+// 			return true;
+// 		}
+// 	},
+// 	deleteProperty(target, prop) {
+// 		// to intercept property deletion
+// 		if (prop.startsWith("_")) {
+// 			throw new Error("Access denied");
+// 		} else {
+// 			delete target[prop];
+// 			return true;
+// 		}
+// 	},
+// 	ownKeys(target) {
+// 		// to intercept property list
+// 		return Object.keys(target).filter((key) => !key.startsWith("_"));
+// 	},
+// });
+
+// // "get" doesn't allow to read _password
+// try {
+// 	console.log(user._password); // Error: Access denied
+// } catch (e) {
+// 	console.log(e.message);
+// }
+
+// // "set" doesn't allow to write _password
+// try {
+// 	user._password = "test"; // Error: Access denied
+// } catch (e) {
+// 	console.log(e.message);
+// }
+
+// // "deleteProperty" doesn't allow to delete _password
+// try {
+// 	delete user._password; // Error: Access denied
+// } catch (e) {
+// 	console.log(e.message);
+// }
+
+// // "ownKeys" filters out _password
+// for (let key in user) console.log(key); // name
+
+/////////////////////////////////////////////
+
+// “In range” with “has” trap
+
+// let range = {
+// 	start: 1,
+// 	end: 10,
+// };
+
+// range = new Proxy(range, {
+// 	has(target, prop) {
+// 		return prop >= target.start && prop <= target.end;
+// 	},
+// });
+
+// console.log(5 in range);  //true
+// console.log(12 in range);  //false
+
+/////////////////////////////////////////////
+
+// two way of wrapping a function with 'apply'
+// using proxy is better because it forwards properties
+
+//first way
+
+// function delay(f, ms) {
+// 	return function () {
+// 		setTimeout(() => f.apply(this, arguments), ms);
+// 	};
+// }
+
+// function sayHi(user) {
+// 	alert(`Hello, ${user}!`);
+// }
+
+// console.log(sayHi.length); // 1 (function length is the arguments count in its declaration)
+
+// sayHi = delay(sayHi, 3000);
+
+// console.log(sayHi.length);  // 0 (in the wrapper declaration, there are zero arguments)
+
+////////////////////////////////
+
+// second way (proxy)
+
+// function delay(f, ms) {
+//   return new Proxy(f, {
+//     apply(target, thisArg, args) {
+//       setTimeout(() => target.apply(thisArg, args), ms);
+//     }
+//   });
+// }
+
+// function sayHi(user) {
+//   console.log(`Hello, ${user}!`);
+// }
+
+// sayHi = delay(sayHi, 3000);
+
+// console.log(sayHi.length); // 1 (*) proxy forwards "get length" operation to the target
+
+// sayHi("John"); // Hello, John! (after 3 seconds)
+
+////////////////////////////////////////////////////
+
+// Reflect
+// Reflect should be used in proxies in order to pass properies and methods in right way
+
+// let user = {
+// 	name: "John",
+// };
+
+// user = new Proxy(user, {
+// 	get(target, prop, receiver) {
+// 		console.log(`GET ${prop}`);
+// 		return Reflect.get(target, prop, receiver); // (1)
+// 	},
+// 	set(target, prop, val, receiver) {
+// 		console.log(`SET ${prop}=${val}`);
+// 		return Reflect.set(target, prop, val, receiver); // (2)
+// 	},
+// });
+
+// let userName = user.name //triggers (1)
+// user.name= 'ali' //triggers (2)
+
+////////////////////////////////////////////////////
 
